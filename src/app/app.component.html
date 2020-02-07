@@ -1,2 +1,41 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<vaadin-app-layout primary-section="navbar|drawer">
+  <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
+  <h3 slot="navbar" >Company Name</h3>
+  <vaadin-tabs orientation="vertical" slot="drawer">
+    <vaadin-tab>
+      <iron-icon icon="vaadin:home"></iron-icon>
+      Home
+    </vaadin-tab>
+    <vaadin-tab>
+      <iron-icon icon="vaadin:list"></iron-icon>
+      Page 2
+    </vaadin-tab>
+    <vaadin-tab>
+      <iron-icon icon="vaadin:list"></iron-icon>
+      Page 3
+    </vaadin-tab>
+    <vaadin-tab>
+      <iron-icon icon="vaadin:list"></iron-icon>
+      Page 4
+    </vaadin-tab>
+  </vaadin-tabs>
+  <!-- Everything else will be the page content -->
+  <div>
+    <h1>Home Page</h1>
+    <h2>Shopping list</h2>
+    <form (ngSubmit)="addItem()">
+      <input 
+        type="text"
+        [(ngModel)]="newShoppingItem.name"
+        placeholder="Item"
+        name="itemName"
+      >
+      <button type="submit">Add Item</button>
+    </form>
+    <ul>
+      <li *ngFor="let shopping of shoppingItems$ | async" (click)="deleteItem(shopping.id)"> 
+        {{ shopping.name }}
+      </li>
+    </ul>
+  </div>
+ </vaadin-app-layout>
